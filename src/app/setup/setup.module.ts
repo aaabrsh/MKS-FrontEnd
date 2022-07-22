@@ -10,6 +10,10 @@ import { TransportOfferComponent } from './components/container/transport-offer/
 import { TransportOfferFormComponent } from './components/ui/transport-offer-form/transport-offer-form.component';
 import { TransportOfferItemComponent } from './components/container/transport-offer-item/transport-offer-item.component';
 import { TransportOfferItemFormComponent } from './components/ui/transport-offer-item-form/transport-offer-item-form.component';
+import { TransportBidComponent } from './components/container/transport-bid/transport-bid.component';
+import { TransportBidItemComponent } from './components/container/transport-bid-item/transport-bid-item.component';
+import { TransportBidFormComponent } from './components/ui/transport-bid-form/transport-bid-form.component';
+import { TransportBidItemFormComponent } from './components/ui/transport-bid-item-form/transport-bid-item-form.component';
 
 
 @NgModule({
@@ -19,7 +23,11 @@ import { TransportOfferItemFormComponent } from './components/ui/transport-offer
     TransportOfferComponent,
     TransportOfferFormComponent,
     TransportOfferItemComponent,
-    TransportOfferItemFormComponent
+    TransportOfferItemFormComponent,
+    TransportBidComponent,
+    TransportBidItemComponent,
+    TransportBidFormComponent,
+    TransportBidItemFormComponent
   ],
   imports: [
     CommonModule,
