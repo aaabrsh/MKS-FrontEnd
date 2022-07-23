@@ -8,8 +8,8 @@ import { TransportBidComponent } from './setup/components/container/transport-bi
 
 const routes: Routes = [
   {path: 'transporters', component: TransporterComponent},
-  {path: 'transport-offer', component: TransportOfferComponent},
-  {path: 'transport-offer/:id', component: TransportOfferItemComponent},
+  {path: 'transport_offers', component: TransportOfferComponent},
+  {path: 'transport_offers/:id', component: TransportOfferItemComponent},
   {path: 'transport_bid', component:TransportBidComponent},
   {path: 'transport_bid_item/:id',component:TransportBidItemComponent}
 ];

@@ -88,7 +88,7 @@ export class TransportOfferComponent implements OnInit {
   }
 
   onDescription(event: any): void{
-    this.router.navigate([`/transport-offer/${event.item.id}`], {relativeTo: this.route})
+    this.router.navigate([`/transport_offers/${event.item.id}`], {relativeTo: this.route})
   }
 
 

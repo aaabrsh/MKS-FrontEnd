@@ -22,7 +22,7 @@ export class AppComponent {
   }
 
   onTransportOffer(): void{
-    this.router.navigate(['/transport-offer'], {relativeTo: this.route})
+    this.router.navigate(['/transport_offers'], {relativeTo: this.route})
   }
 
   onTransportBid()
