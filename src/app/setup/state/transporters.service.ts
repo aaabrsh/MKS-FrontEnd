@@ -10,14 +10,10 @@ import { TransportersStore } from './transporters.store';
 @Injectable({ providedIn: 'root' })
 export class TransportersService {
 
-  transporters: Transporter[] = [
-    {id: 1, name: 'ABC Transporter', code: 'ABC Transporter', address: 'Test', contact_phone: '0912333442'}
-  ];
   constructor(private transportersStore: TransportersStore,
     private http: HttpClient,
     private utilService: UtilService) {
   }
-
 
   get() {
     const url = `${environment.apiUrl}/transporters`;

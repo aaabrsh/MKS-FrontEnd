@@ -50,7 +50,7 @@ export class TransportBidItemComponent implements OnInit {
     this.route.params.subscribe((data:any)=>{
       this.id=data.id;
     })
-   this.service.get(this.id);
+   this.service.get();
   }
   
   onEdit(event: any): void {

@@ -28,8 +28,6 @@ export class TransporterComponent implements OnInit {
     { name: 'contact_phone', label: 'Contact Phone'},
   ];
 
-  transporters: Transporter[] = [];
-
   transporters$: Observable<Transporter[]> = this.query.selectAll();
   
   constructor(private dialog: MatDialog,

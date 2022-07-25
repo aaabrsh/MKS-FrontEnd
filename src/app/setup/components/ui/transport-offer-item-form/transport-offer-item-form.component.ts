@@ -20,17 +20,19 @@ export class TransportOfferItemFormComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private dummy: DummyDataService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+    
+    this.bid_items = data.bidItems;
+
     this.form = this.fb.group({
-      id: data.id,
-      transport_bid_item_id: [data.transport_bid_item_id, [Validators.required]],
-      price: [data.price, [Validators.required, Validators.min(0)]],
-      winner: data.winner,
-      rank: data.rank
+      id: data.values.id,
+      transport_bid_item_id: [data.values.transport_bid_item_id, [Validators.required]],
+      price: [data.values.price, [Validators.required, Validators.min(0)]],
+      winner: data.values.winner,
+      rank: data.values.rank
     });
   }
 
   ngOnInit(): void {
-    this.bid_items = this.dummy.getBidItems();
   }
 
   onSubmit(): void {

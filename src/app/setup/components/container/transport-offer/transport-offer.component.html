@@ -3,7 +3,7 @@
 ></cats-toolbar>
 
 <cats-list [columns]="columns"
-           [data]="transportOffers$|async"
+           [data]="transportOffers"
            [hasAction]="true"
            [actions]="tableActions"
            (actionClick)="onClick($event)"

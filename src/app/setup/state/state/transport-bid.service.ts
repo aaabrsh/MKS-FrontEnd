@@ -76,7 +76,18 @@ export class TransportBidService {
   }
   
   get() {
-    return this.transportBidStore.set(this.transportBid);
+    // return this.transportBidStore.set(this.transportBid);
+
+    const url = `${environment.apiUrl}/transport_bids`;
+    return this.http.get(url).pipe(
+      tap({next: (response: any) => {
+        if (response.success) {
+          this.transportBidStore.set(response.data);
+        } else {
+          this.utilService.showErrorMessage(response.error);
+        }
+      }, error: () => this.utilService.showErrorMessage('Error')})
+    )
   }
 
   add(transportBidItem: TransportBid) {
