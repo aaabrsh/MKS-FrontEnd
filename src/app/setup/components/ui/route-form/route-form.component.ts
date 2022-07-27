@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder,FormControl,FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -13,18 +13,22 @@ export class RouteFormComponent implements OnInit {
   
 
   locations$;
+  locationRegions$;
   form: FormGroup;
 
   constructor(private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: {formData:any, lookupData:any}) { 
 
       this.locations$ = this.data.lookupData.locations$;
+      this.locationRegions$ =this.data.lookupData.locationRegions$;
       this.form = this.fb.group({
-        id: data.formData.id,
-        name: data.formData.name,
-        region_id:data.formData.region_id,
+        id: [data.formData.id],
+        name: [data.formData.name,[Validators.required]],
+        region_id:[data.formData.region_id,[Validators.required]],
         source_id:data.formData.source_id,
-        destination_id:data.formData.destination_id
+        destination_id:[data.formData.destination_id],
+      },{
+        validators: this.controlMatchValidator,
       });
     }
 
@@ -36,4 +40,16 @@ export class RouteFormComponent implements OnInit {
     this.formSubmit.emit(payload);
   }
 
+   controlMatchValidator: ValidatorFn = (control: AbstractControl):
+    ValidationErrors | null => {
+    
+    const source = control.get('source_id');
+    const destination = control.get('destination_id');
+
+   return source.value != destination.value ? { controlMatch: true } : null;
+  };
+
+
+
 }
+

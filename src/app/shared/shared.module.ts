@@ -5,13 +5,15 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { ShortDatePipe } from './pipes/short-date.pipe';
 import { AppCommonModule } from '../app.common.module';
+import { TreeListComponent } from './components/tree-list/tree-list.component';
 
 @NgModule({
   declarations: [
     ListComponent,
     ToolbarComponent,
     TimeAgoPipe,
-    ShortDatePipe
+    ShortDatePipe,
+    TreeListComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { AppCommonModule } from '../app.common.module';
   exports: [
     ListComponent,
     ToolbarComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    TreeListComponent
   ]
 })
 export class SharedModule { }

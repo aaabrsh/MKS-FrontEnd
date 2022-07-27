@@ -13,14 +13,14 @@
       <input
         type="text"
         matInput
-        formControlName="plan_type"
-        placeholder="Plan Type"
+        formControlName="quantity"
+        placeholder="Quantity"
       />
     </mat-form-field>
 
     <mat-form-field class="full-width">
-      <mat-label>Region </mat-label>
-      <mat-select formControlName="region_id" placeholder="Region"> 
+      <mat-label>Unit </mat-label>
+      <mat-select formControlName="unit_id" > 
         <mat-option *ngFor="let item of locations$| async" [value]="item.id">
           {{ item.name }}
         </mat-option>

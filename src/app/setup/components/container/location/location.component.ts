@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { Column } from 'src/app/shared/models/column.model';
 import { EMPTY_LOCATION, Location } from 'src/app/setup/models/location.model';
 import { LocationsQuery } from 'src/app/setup/state/locations.query';
 import { LocationsService } from 'src/app/setup/state/locations.service';
 import { MatDialog } from '@angular/material/dialog';
 import { LocationFormComponent } from '../../ui/location-form/location-form.component';
+import { TreeNode } from 'primeng/api';
 
 @Component({
   selector: 'app-location',
@@ -18,16 +19,19 @@ export class LocationComponent implements OnInit {
     { color: 'success', label: 'New', disabled: false, icon: 'add_circle' }
   ];
 
-  tableActions: any[] = [
-    { icon: 'edit', color: 'warn', tooltip: 'Edit'}
-  ]
+  // tableActions: any[] = [
+  //   { icon: 'edit', color: 'warn', tooltip: 'Edit'}
+  // ]
   
   columns: Column[] = [
-    { name: 'code', label: 'Code'},
-    { name: 'name', label: 'Name'},
-    { name: 'location_type', label: 'Location Type'},
-    { name: 'description', label: 'Description'},
-    { name: 'ancestry', label: 'Ancestry'}
+    { name:'name' , label:'Name'},
+    {name:'size', label:'Size'},
+    { name:'type', label:'Type'}
+    // { name: 'code', label: 'Code'},
+    // { name: 'name', label: 'Name'},
+    // { name: 'location_type', label: 'Location Type'},
+    // { name: 'description', label: 'Description'},
+    // { name: 'ancestry', label: 'Ancestry'}
   ];
 
   
@@ -35,15 +39,103 @@ export class LocationComponent implements OnInit {
 
   locations$: Observable<Location[]> = this.query.selectAll();
 
+  files: TreeNode[]=[
+
+{
+  "data":
+  [
+      {
+          "data":{
+              "name":"Documents",
+              "size":"75kb",
+              "type":"Folder"
+          },
+          "children":[
+              {
+                  "data":{
+                      "name":"Work",
+                      "size":"55kb",
+                      "type":"Folder"
+                  },
+                  "children":[
+                      {
+                          "data":{
+                              "name":"Expenses.doc",
+                              "size":"30kb",
+                              "type":"Document"
+                          }
+                      },
+                      {
+                          "data":{
+                              "name":"Resume.doc",
+                              "size":"25kb",
+                              "type":"Resume"
+                          }
+                      }
+                  ]
+              },
+              {
+                  "data":{
+                      "name":"Home",
+                      "size":"20kb",
+                      "type":"Folder"
+                  },
+                  "children":[
+                      {
+                          "data":{
+                              "name":"Invoices",
+                              "size":"20kb",
+                              "type":"Text"
+                          }
+                      }
+                  ]
+              }
+          ]
+      },
+      {
+          "data":{
+              "name":"Pictures",
+              "size":"150kb",
+              "type":"Folder"
+          },
+          "children":[
+              {
+                  "data":{
+                      "name":"barcelona.jpg",
+                      "size":"90kb",
+                      "type":"Picture"
+                  }
+              },
+              {
+                  "data":{
+                      "name":"primeui.png",
+                      "size":"30kb",
+                      "type":"Picture"
+                  }
+              },
+              {
+                  "data":{
+                      "name":"optimus.jpg",
+                      "size":"30kb",
+                      "type":"Picture"
+                  }
+              }
+          ]
+      }
+  ]
+}
+  ]
+
   constructor(private dialog: MatDialog,
     private service:LocationsService,
-    private query: LocationsQuery) { 
+    private query: LocationsQuery,) { 
+
       this.service.get().subscribe();
+     
     }
 
   ngOnInit(): void {
   }
-
 
   
   onAdd(event: any): void {

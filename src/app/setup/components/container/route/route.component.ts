@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { filter, map, observable, Observable } from 'rxjs';
 import { EMPTY_ROUTE, Route } from 'src/app/setup/models/route.model';
 import { Column } from 'src/app/shared/models/column.model';
 import { RoutesQuery } from 'src/app/setup/state/routes.query';
@@ -9,6 +9,7 @@ import { RouteFormComponent } from '../../ui/route-form/route-form.component';
 import { LocationsService } from 'src/app/setup/state/locations.service';
 import { LocationsQuery } from 'src/app/setup/state/locations.query';
 import { Location } from 'src/app/setup/models/location.model';
+
 
 @Component({
   selector: 'app-route',
@@ -38,14 +39,22 @@ export class RouteComponent implements OnInit {
   
   routes$: Observable<Route[]> = this.query.selectAll();
   locations$:Observable<Location[]> = this.locationQuery.selectAll();
+  locationRegions$:Observable<Location[]> =this.locationQuery.selectAll(
+    {
+      filterBy: Location => Location.location_type == "Region"
+    }
+  );
+  
   
   constructor(private dialog: MatDialog,
     private service:RoutesService,
     private query: RoutesQuery,
     private locationService:LocationsService,
     private locationQuery:LocationsQuery) { 
+     
       this.service.get().subscribe();
       this.locationService.get().subscribe();
+    
     }
 
   ngOnInit(): void {
@@ -58,6 +67,7 @@ export class RouteComponent implements OnInit {
       formData: EMPTY_ROUTE,
       lookupData:{
          locations$: this.locations$,
+         locationRegions$: this.locationRegions$,
       },
       
     }
@@ -86,4 +96,9 @@ export class RouteComponent implements OnInit {
      });
   }
 
+  // getRegions():void{
+  //   this.locationRegions$.pipe(
+  //     map((this.locationRegions$.))
+  //   )
+  // }
 }

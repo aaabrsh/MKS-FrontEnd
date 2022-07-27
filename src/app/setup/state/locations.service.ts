@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UtilService } from 'src/app/shared/services/util.service';
 import { environment } from 'src/environments/environment';
-import { tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { Location } from '../models/location.model';
 import { LocationsStore } from './locations.store';
+import {TreeNode} from 'primeng/api';
 
 @Injectable({ providedIn: 'root' })
 export class LocationsService {
@@ -20,6 +21,18 @@ export class LocationsService {
       tap({next: (response: any) => {
         if (response.success) {
           this.locationsStore.set(response.data);
+        } else {
+          this.utilService.showErrorMessage(response.error);
+        }
+      }, error: () => this.utilService.showErrorMessage('Error')})
+    )
+  }
+  getRegions() {
+    const url = `${environment.apiUrl}/locations`;
+    return this.http.get(url).pipe(
+      tap({next: (response: any) => {
+        if (response.success) {
+           this.locationsStore.set(response.data);        
         } else {
           this.utilService.showErrorMessage(response.error);
         }

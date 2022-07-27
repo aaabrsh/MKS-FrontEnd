@@ -3,32 +3,36 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-form-field class="full-width">
       <input type="text" matInput formControlName="name" placeholder="Name" />
+      <mat-error *ngIf="form.get('name').errors?.['required']">
+            Name is required.
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="full-width">
       <mat-label>Region</mat-label>
          <mat-select formControlName="region_id" >
-            <mat-option *ngFor="let item of locations$|async; let i= index" [value]= item.id>
+            <mat-option *ngFor="let item of locationRegions$|async; let i= index" [value]= item.id>
             {{ item.name }}
             </mat-option> 
+            <mat-error *ngIf="form.get('region_id').errors?.['required']">Region is required.</mat-error>
         </mat-select>
     </mat-form-field>
     <mat-form-field class="full-width">
         <mat-label>Source</mat-label>
            <mat-select formControlName="source_id" >
               <mat-option *ngFor="let item of locations$|async; let i= index" [value]= item.id>
-              {{ item.name }}
+              {{ item.id }}
               </mat-option> 
-          </mat-select>
+            </mat-select>
       </mat-form-field>
       <mat-form-field class="full-width">
         <mat-label>Destination</mat-label>
            <mat-select formControlName="destination_id" >
               <mat-option *ngFor="let item of locations$|async; let i= index" [value]= item.id>
-              {{ item.name }}
+              {{ item.id }}
               </mat-option> 
           </mat-select>
       </mat-form-field>
-
+      <mat-error *ngIf="!form.errors?.['controlMatch'] "> Source and Destination should not have the same value.</mat-error>          
   </form>
 </div>
 <div mat-dialog-actions align="end">

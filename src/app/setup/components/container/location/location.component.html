@@ -1,10 +1,17 @@
 <cats-toolbar [actions]="actions"
               (actionClick)="onAdd($event)"
 ></cats-toolbar>
+<app-tree-list [files]="files"
+               [cols]="columns"
+               [totalRecords]="1000"
+               [loading]="false"
+             
+></app-tree-list>
 
-<cats-list [columns]="columns"
+
+<!-- <cats-list [columns]="columns"
            [data]="locations$|async"
            [hasAction]="true"
            [actions]="tableActions"
            (actionClick)="onEdit($event)"
-></cats-list>
+></cats-list> -->

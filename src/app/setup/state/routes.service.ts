@@ -18,6 +18,12 @@ export class RoutesService  {
     return this.http.get(url).pipe(
       tap({next: (response: any) => {
         if (response.success) {
+          response.data.map((res:any)=>{
+            // res.region_id = res.region.name;
+            // res.destination = res.destination.name;
+            // res.source_id =res.source.name
+                      
+          });
           this.store.set(response.data);
          
         } else {

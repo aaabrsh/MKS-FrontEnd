@@ -30,13 +30,14 @@ export class TransportPlanComponent implements OnInit {
   columns: Column[] = [
     { name: 'reference_no', label: 'Reference_no'},
     { name: 'plan_type', label: 'Plan_type'},
-    { name: 'region_id', label: 'Region'},
+    { name: 'region_name', label: 'Region'},
   ];
   
   transportPlan: TransportPlan[] = [];
 
 
   transportPlans$: Observable<TransportPlan[]> = this.query.selectAll();
+
   locations$: Observable<Location[]> = this.locationQuery.selectAll();
 
   constructor(private dialog: MatDialog,

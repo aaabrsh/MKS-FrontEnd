@@ -12,6 +12,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
+import {TreeTableModule} from 'primeng/treetable';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
         FileUploadModule,
         ConfirmDialogModule,
         CheckboxModule,
-        InputNumberModule
+        InputNumberModule,
+        TreeTableModule,
     ]
 })
 export class NgPrimeModule { }
