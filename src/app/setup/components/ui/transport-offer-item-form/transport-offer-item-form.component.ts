@@ -18,8 +18,10 @@ export class TransportOfferItemFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    
-    this.bid_items = data.bidItems;
+
+    data.bidItems$.subscribe((data: any) => {
+      this.bid_items = data;
+    });
 
     this.form = this.fb.group({
       id: data.values.id,

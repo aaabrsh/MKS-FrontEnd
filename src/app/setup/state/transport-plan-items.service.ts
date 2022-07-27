@@ -39,7 +39,6 @@ export class TransportPlanItemsService  {
           if (response.success) {
             this.transportPlanItemsStore.add(response.data);
           } else {
-            console.log(response.error);
             this.utilService.showErrorMessage(response.error);
           }
         }, error: () => this.utilService.showErrorMessage('Error')

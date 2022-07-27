@@ -32,8 +32,8 @@ export class TransportOfferComponent implements OnInit {
   ]
 
   columns: Column[] = [
-    { name: 'transport_bid_ref', label: 'Transport Bid' },
-    { name: 'transport_code_and_name', label: 'Transporter' },
+    { name: 'transport_bid_reference_no', label: 'Transport Bid' },
+    { name: 'transporter_code', label: 'Transporter' },
     { name: 'offer_date', label: 'Offer Date' }
   ];
 
@@ -81,7 +81,6 @@ export class TransportOfferComponent implements OnInit {
     this.service.get().subscribe();
     this.transportersService.get().subscribe();
     this.transportBidService.get().subscribe();
-    console.log(this.transportOffers$)
   }
 
   onClick(event: any): void {
@@ -92,7 +91,6 @@ export class TransportOfferComponent implements OnInit {
   }
 
   onEdit(event: any): void {
-
     const dialogRef = this.dialog.open(TransportOfferFormComponent, {
       disableClose: true,
       data: { 

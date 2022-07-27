@@ -41,6 +41,13 @@ export class OfferItemsService {
     return this.http.get(url).pipe(
       tap({next: (response: any) => {
         if (response.success) {
+
+          for (let i = 0; i < response.data.length; i++) {
+
+            response.data[i].transport_bid_item_id = response.data[i].transport_bid_item.id;
+            response.data[i].transport_bid_reference_no = response.data[i].transport_bid_item.transport_bid_reference_no;
+
+          }
           this.offerItemsStore.set(response.data);
         } else {
           this.utilService.showErrorMessage(response.error);
@@ -50,13 +57,13 @@ export class OfferItemsService {
   }
 
   add(OfferItem: OfferItem) {
-    // this.offerItemsStore.add(OfferItem);
-
     const url = `${environment.apiUrl}/transport_offer_items`;
     return this.http.post(url, OfferItem).pipe(
       tap({
         next: (response: any) => {
           if (response.success) {
+            response.data.transport_bid_item_id = response.data.transport_bid_item.id;
+            response.data.transport_bid_reference_no = response.data.transport_bid_item.transport_bid_reference_no;
             this.offerItemsStore.add(response.data);
           } else {
             this.utilService.showErrorMessage(response.error);
@@ -67,13 +74,15 @@ export class OfferItemsService {
   }
 
   update(id: any, OfferItem: Partial<OfferItem>) {
-    // this.offerItemsStore.update(id, OfferItem);
-
     const url = `${environment.apiUrl}/transport_offer_items/${id}`;
     return this.http.put(url,  OfferItem).pipe(
       tap({
         next: (response: any) => {
           if (response.success) {
+
+            response.data.transport_bid_item_id = response.data.transport_bid_item.id;
+            response.data.transport_bid_reference_no = response.data.transport_bid_item.transport_bid_reference_no;
+
             this.offerItemsStore.update(id, response.data);
           } else {
             this.utilService.showErrorMessage(response.error);

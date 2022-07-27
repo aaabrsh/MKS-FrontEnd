@@ -22,156 +22,101 @@ export class LocationComponent implements OnInit {
   // tableActions: any[] = [
   //   { icon: 'edit', color: 'warn', tooltip: 'Edit'}
   // ]
-  
+
   columns: Column[] = [
-    { name:'name' , label:'Name'},
-    {name:'size', label:'Size'},
-    { name:'type', label:'Type'}
-    // { name: 'code', label: 'Code'},
-    // { name: 'name', label: 'Name'},
-    // { name: 'location_type', label: 'Location Type'},
-    // { name: 'description', label: 'Description'},
-    // { name: 'ancestry', label: 'Ancestry'}
+    { name: 'code', label: 'Code'},
+    { name: 'name', label: 'Name'},
+    { name: 'location_type', label: 'Location Type'},
+    { name: 'description', label: 'Description'}
   ];
 
-  
-  locations: Location[] = [];
 
-  locations$: Observable<Location[]> = this.query.selectAll();
+  locations: TreeNode[] = [];
+  loading: boolean = false;
 
-  files: TreeNode[]=[
+  allLocations$: Observable<Location[]> = this.query.selectAll();
 
-{
-  "data":
-  [
-      {
-          "data":{
-              "name":"Documents",
-              "size":"75kb",
-              "type":"Folder"
-          },
-          "children":[
-              {
-                  "data":{
-                      "name":"Work",
-                      "size":"55kb",
-                      "type":"Folder"
-                  },
-                  "children":[
-                      {
-                          "data":{
-                              "name":"Expenses.doc",
-                              "size":"30kb",
-                              "type":"Document"
-                          }
-                      },
-                      {
-                          "data":{
-                              "name":"Resume.doc",
-                              "size":"25kb",
-                              "type":"Resume"
-                          }
-                      }
-                  ]
-              },
-              {
-                  "data":{
-                      "name":"Home",
-                      "size":"20kb",
-                      "type":"Folder"
-                  },
-                  "children":[
-                      {
-                          "data":{
-                              "name":"Invoices",
-                              "size":"20kb",
-                              "type":"Text"
-                          }
-                      }
-                  ]
-              }
-          ]
-      },
-      {
-          "data":{
-              "name":"Pictures",
-              "size":"150kb",
-              "type":"Folder"
-          },
-          "children":[
-              {
-                  "data":{
-                      "name":"barcelona.jpg",
-                      "size":"90kb",
-                      "type":"Picture"
-                  }
-              },
-              {
-                  "data":{
-                      "name":"primeui.png",
-                      "size":"30kb",
-                      "type":"Picture"
-                  }
-              },
-              {
-                  "data":{
-                      "name":"optimus.jpg",
-                      "size":"30kb",
-                      "type":"Picture"
-                  }
-              }
-          ]
-      }
-  ]
-}
-  ]
+
+
 
   constructor(private dialog: MatDialog,
-    private service:LocationsService,
-    private query: LocationsQuery,) { 
-
-      this.service.get().subscribe();
-     
-    }
-
-  ngOnInit(): void {
+    private service: LocationsService,
+    private query: LocationsQuery,) {
   }
 
-  
+  ngOnInit(): void {
+    this.service.get();    
+  }
+
+  onLoad($event: any): void{
+    this.locations = this.service.getRegions();
+  }
+
+  onExpand($event: any): void{
+      this.loading = false;
+      const node = $event.node;
+      this.service.getChildren($event.node.data.id).subscribe((data) => {
+        node.children = data;
+      });
+      
+      // node.children.push(temp);
+    //   node.children = [
+    //     {
+    //         data: {  
+    //             name: node.data.name + ' - 0',
+    //             size: Math.floor(Math.random() * 1000) + 1 + 'kb',
+    //             type: 'File'
+    //         },
+    //     },
+    //     {
+    //         data: {  
+    //             name: node.data.name + ' - 1',
+    //             size: Math.floor(Math.random() * 1000) + 1 + 'kb',
+    //             type: 'File'
+    //         }
+    //     }
+    // ];
+    node.expanded = true;
+      
+      this.locations = [...this.locations];
+      this.locations = [...this.locations];
+
+  }
+
   onAdd(event: any): void {
     const dialogRef = this.dialog.open(LocationFormComponent, {
-     disableClose: true,
-     data: {
-      formData: EMPTY_LOCATION,
-      lookupData:{
-        locations$: this.locations$
+      disableClose: true,
+      data: {
+        formData: EMPTY_LOCATION,
+        lookupData: {
+          locations$: this.allLocations$
+        }
       }
-    }
     });
-    
-    (dialogRef.componentInstance as any).formSubmit.subscribe((data: any) => {
-      data.ancestry ===""? data.ancestry = null :data.ancestry= data.ancestry;
-      this.service.add(data).subscribe();
-       dialogRef.close();
-    });
-   }
 
-   onEdit(event: any): void {
+    (dialogRef.componentInstance as any).formSubmit.subscribe((data: any) => {
+      data.ancestry === "" ? data.ancestry = null : data.ancestry = data.ancestry;
+      this.service.add(data).subscribe();
+      dialogRef.close();
+    });
+  }
+
+  onEdit(event: any): void {
     const dialogRef = this.dialog.open(LocationFormComponent, {
       disableClose: true,
-      data:{
+      data: {
         formData: event.item,
         lookupData: {
-          selectedItem:event.item.ancestry,
-          locations$: this.locations$
+          selectedItem: event.item.ancestry,
+          locations$: this.allLocations$
         }
-      } 
-     });
-     
-     (dialogRef.componentInstance as any).formSubmit.subscribe((data: any) => {
-      data.ancestry ===""? data.ancestry = null :data.ancestry= data.ancestry;      
-        this.service.update(data.id, data).subscribe();
-        dialogRef.close();
-     });
+      }
+    });
+
+    (dialogRef.componentInstance as any).formSubmit.subscribe((data: any) => {
+      data.ancestry === "" ? data.ancestry = null : data.ancestry = data.ancestry;
+      this.service.update(data.id, data).subscribe();
+      dialogRef.close();
+    });
   }
 }

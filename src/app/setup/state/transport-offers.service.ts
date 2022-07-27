@@ -22,17 +22,6 @@ export class TransportOffersService {
       tap({
         next: (response: any) => {
           if (response.success) {
-
-            for (let i = 0; i < response.data.length; i++) {
-
-              response.data[i].transport_bid_id = response.data[i].transport_bid.id;
-              response.data[i].transport_bid_ref = response.data[i].transport_bid.reference_no;
-              response.data[i].transporter_id = response.data[i].transporter.id;
-              response.data[i].transporter_code = response.data[i].transporter.code;
-              response.data[i].transporter_name = response.data[i].transporter.name;
-              response.data[i].transport_code_and_name = `${response.data[i].transporter_code}: ${response.data[i].transporter_name}`;
-
-            }
             this.transportOffersStore.set(response.data);
           } else {
             this.utilService.showErrorMessage(response.error);
@@ -63,14 +52,6 @@ export class TransportOffersService {
       tap({
         next: (response: any) => {
           if (response.success) {
-            
-            response.data.transport_bid_id = response.data.transport_bid.id;
-            response.data.transport_bid_ref = response.data.transport_bid.reference_no;
-            response.data.transporter_id = response.data.transporter.id;
-            response.data.transporter_code = response.data.transporter.code;
-            response.data.transporter_name = response.data.transporter.name;
-            response.data.transport_code_and_name = `${response.data.transporter_code}: ${response.data.transporter_name}`;
-
             this.transportOffersStore.update(id, response.data);
           } else {
             this.utilService.showErrorMessage(response.error);

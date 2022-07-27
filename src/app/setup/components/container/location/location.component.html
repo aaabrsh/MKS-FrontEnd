@@ -1,11 +1,11 @@
 <cats-toolbar [actions]="actions"
               (actionClick)="onAdd($event)"
 ></cats-toolbar>
-<app-tree-list [files]="files"
+<app-tree-list [locations]="locations"
                [cols]="columns"
-               [totalRecords]="1000"
-               [loading]="false"
-             
+               [loading]="loading"
+               (loadTable)="onLoad($event)"
+                (nodeExpand)="onExpand($event)"
 ></app-tree-list>
 
 
