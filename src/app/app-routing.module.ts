@@ -24,7 +24,7 @@ const routes: Routes = [
   {path:'locations', component: LocationComponent},
   {path:'routes', component:RouteComponent},
   {path:'transport_plan_items/:id', component: TransportPlanItemComponent}
-
+]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

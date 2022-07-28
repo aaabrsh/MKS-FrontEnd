@@ -36,21 +36,5 @@ import { MatToolbarModule } from '@angular/material/toolbar';
                 MatToolbarModule,
                 MatAutocompleteModule
         ]
-    exports: [
-        MatDialogModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatButtonModule,
-        MatTooltipModule,
-        MatCardModule,
-        MatListModule,
-        MatMenuModule,
-        MatCheckboxModule,
-        MatSelectModule,
-        MatAutocompleteModule,
-        MatDatepickerModule,
-        MatToolbarModule
-    ]
 })
 export class MaterialModule { }

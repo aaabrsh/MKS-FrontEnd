@@ -28,9 +28,6 @@ export class TransporterFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onCancel(){
-    this.dialog.closeAll();
-  }
   onSubmit(): void {
     const payload = this.form.value;
     this.formSubmit.emit(payload);
