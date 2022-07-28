@@ -1,0 +1,17 @@
+<cats-toolbar [actions]="actions"
+              (actionClick)="onAdd($event)"
+></cats-toolbar>
+<app-tree-list [locations]="locations"
+               [cols]="columns"
+               [loading]="loading"
+               (loadTable)="onLoad($event)"
+                (nodeExpand)="onExpand($event)"
+></app-tree-list>
+
+
+<!-- <cats-list [columns]="columns"
+           [data]="locations$|async"
+           [hasAction]="true"
+           [actions]="tableActions"
+           (actionClick)="onEdit($event)"
+></cats-list> -->

@@ -32,8 +32,8 @@ export class TransportOfferComponent implements OnInit {
   ]
 
   columns: Column[] = [
-    { name: 'transport_bid_ref', label: 'Transport Bid' },
-    { name: 'transport_code_and_name', label: 'Transporter' },
+    { name: 'transport_bid_reference_no', label: 'Transport Bid' },
+    { name: 'transporter_code', label: 'Transporter' },
     { name: 'offer_date', label: 'Offer Date' }
   ];
 
@@ -52,27 +52,28 @@ export class TransportOfferComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) {
 
-    this.transportOffers$.pipe(
-      tap((data) => {
-        const length = data.length;
-        for (let i = 0; i < length; i++) {
-          var offer: any = {};
+    // this.transportOffers$.pipe(
+    //   tap((data) => {
+    //     const length = data.length;
+    //     for (let i = 0; i < length; i++) {
+    //       var offer: any = {};
 
-          offer.id = data[0].id;
-          offer.offer_date = data[0].offer_date;
-          offer.transport_bid_id = data[0].transport_bid.id;
-          offer.transport_bid_ref = data[0].transport_bid.reference_no;
-          offer.transporter_id = data[0].transporter.id;
-          offer.transporter_code = data[0].transporter.code;
-          offer.transporter_name = data[0].transporter.name;
-          offer.transport_code_and_name = `${offer.transporter_code}: ${offer.transporter_name}`;
+    //       offer.id = data[0].id;
+    //       offer.offer_date = data[0].offer_date;
+    //       offer.transport_bid_id = data[0].transport_bid.id;
+    //       offer.transport_bid_ref = data[0].transport_bid.reference_no;
+    //       offer.transporter_id = data[0].transporter.id;
+    //       offer.transporter_code = data[0].transporter.code;
+    //       offer.transporter_name = data[0].transporter.name;
+    //       offer.transport_code_and_name = `${offer.transporter_code}: ${offer.transporter_name}`;
 
-          data.splice(0, 1);
-          data.push(offer);
-        }
-      })).subscribe((data) => {
-        this.transportOffers = data;
-      });
+    //       data.splice(0, 1);
+    //       data.push(offer);
+    //     }
+    //   })).subscribe((data) => {
+    //     this.transportOffers = data;
+    //   });
+
   }
 
   ngOnInit(): void {
@@ -90,7 +91,7 @@ export class TransportOfferComponent implements OnInit {
   }
 
   onEdit(event: any): void {
-
+  
     const dialogRef = this.dialog.open(TransportOfferFormComponent, {
       disableClose: true,
       data: { 

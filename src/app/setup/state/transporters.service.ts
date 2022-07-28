@@ -18,19 +18,21 @@ export class TransportersService {
   get() {
     const url = `${environment.apiUrl}/transporters`;
     return this.http.get(url).pipe(
-      tap({next: (response: any) => {
-        if (response.success) {
-          this.transportersStore.set(response.data);
-        } else {
-          this.utilService.showErrorMessage(response.error);
-        }
-      }, error: () => this.utilService.showErrorMessage('Error')})
+      tap({
+        next: (response: any) => {
+          if (response.success) {
+            this.transportersStore.set(response.data);
+          } else {
+            this.utilService.showErrorMessage(response.error);
+          }
+        }, error: () => this.utilService.showErrorMessage('Error')
+      })
     )
   }
 
   add(transporter: Transporter) {
     const url = `${environment.apiUrl}/transporters`;
-    return this.http.post(url, {transporter}).pipe(
+    return this.http.post(url, { transporter }).pipe(
       tap({
         next: (response: any) => {
           if (response.success) {

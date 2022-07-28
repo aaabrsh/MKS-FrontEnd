@@ -14,13 +14,15 @@
         <mat-form-field class="full-width">
             <input type="text" matInput formControlName="address" placeholder="Address">
         </mat-form-field>
-        <mat-error *ngIf="form.get('address').touched && form.get('address').invalid">{{getErrorMessage('address')}}</mat-error>
+        <mat-error *ngIf="form.get('address').touched && form.get('address').invalid">{{getErrorMessage('address')}}
+        </mat-error>
+
 
         <mat-form-field class="full-width">
             <input type="text" matInput formControlName="contact_phone" placeholder="Contact Phone">
         </mat-form-field>
-        <mat-error *ngIf="form.get('contact_phone').touched && form.get('contact_phone').invalid">{{getErrorMessage('contact_phone')}}</mat-error>
-
+        <mat-error *ngIf="form.get('contact_phone').touched && form.get('contact_phone').invalid">
+            {{getErrorMessage('contact_phone')}}</mat-error>
     </form>
 </div>
 <div mat-dialog-actions align="end">

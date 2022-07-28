@@ -1,0 +1,7 @@
+<cats-toolbar [actions]="actions"></cats-toolbar>
+
+<cats-list [columns]="columns"
+           [data]="unitOfMeasures$|async"
+           [hasAction]="true"
+           [actions]="tableActions"
+></cats-list>

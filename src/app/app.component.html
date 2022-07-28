@@ -1,10 +1,11 @@
 <p-toast></p-toast>
-<div class="navbar">
-    <div class="header">
-        <h1 (click)="homeClicked()">Transport Managment</h1>
-        <button mat-raised-button (click)="onTransporter()">Register Transporters</button>
-        <button mat-raised-button (click)="onTransportOffer()">Register Transport Offer</button>
-        <button mat-raised-button (click)="onTransportBid()">Transport Bid</button>
-    </div>
+<div class="header">
+  <h1 (click)="homeClicked()">Transport Managment</h1>
+  <button mat-raised-button (click)="onTransporter()">Transporters</button>
+  <button mat-raised-button (click)="onLocation()">Location</button>
+  <button mat-raised-button (click)="onTransportPlan()">Transporter Plan </button>
+  <button mat-raised-button (click)="onTransportBid()">Transport Bid</button>
+  <button mat-raised-button (click)="onTransportOffer()">Transport Offer</button>
+  <button mat-raised-button (click)="onRoute()">Route</button>
 </div>
 <router-outlet></router-outlet>

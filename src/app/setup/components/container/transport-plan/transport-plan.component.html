@@ -1,0 +1,9 @@
+<cats-toolbar [actions]="actions"
+(actionClick)="onAdd($event)"></cats-toolbar>
+
+<cats-list [columns]="columns"
+           [data]="transportPlans$|async"
+           [hasAction]="true"
+           [actions]="tableActions"
+           (actionClick)="onClick($event)"
+></cats-list>

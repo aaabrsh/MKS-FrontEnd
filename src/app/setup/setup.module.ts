@@ -14,6 +14,16 @@ import { TransportBidComponent } from './components/container/transport-bid/tran
 import { TransportBidItemComponent } from './components/container/transport-bid-item/transport-bid-item.component';
 import { TransportBidFormComponent } from './components/ui/transport-bid-form/transport-bid-form.component';
 import { TransportBidItemFormComponent } from './components/ui/transport-bid-item-form/transport-bid-item-form.component';
+import { LocationComponent } from './components/container/location/location.component';
+import { RouteComponent } from './components/container/route/route.component';
+import { TransportPlanComponent } from './components/container/transport-plan/transport-plan.component';
+import { TransportPlanItemComponent } from './components/container/transport-plan-item/transport-plan-item.component';
+import { UnitOfMeasureComponent } from './components/container/unit-of-measure/unit-of-measure.component';
+import { TransportPlanFormComponent } from './components/ui/transport-plan-form/transport-plan-form.component';
+import { UnitOfMeasureFormComponent } from './components/ui/unit-of-measure-form/unit-of-measure-form.component';
+import { LocationFormComponent } from './components/ui/location-form/location-form.component';
+import { RouteFormComponent } from './components/ui/route-form/route-form.component';
+import { TransportPlanItemFormComponent } from './components/ui/transport-plan-item-form/transport-plan-item-form.component';
 
 
 @NgModule({
@@ -27,7 +37,18 @@ import { TransportBidItemFormComponent } from './components/ui/transport-bid-ite
     TransportBidComponent,
     TransportBidItemComponent,
     TransportBidFormComponent,
-    TransportBidItemFormComponent
+    TransportBidItemFormComponent,
+    LocationComponent,
+    RouteComponent,
+    TransportPlanComponent,
+    TransportPlanItemComponent,
+    UnitOfMeasureComponent,
+    TransportPlanFormComponent,
+    UnitOfMeasureFormComponent,
+    LocationFormComponent,
+    RouteFormComponent,
+    TransportPlanItemFormComponent,
+
   ],
   imports: [
     CommonModule,

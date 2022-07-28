@@ -6,18 +6,36 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
-import {MatListModule} from '@angular/material/list';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatToolbarModule} from '@angular/material/toolbar';
+
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 
 
 @NgModule({
+        exports: [
+                MatDialogModule,
+                MatFormFieldModule,
+                MatIconModule,
+                MatInputModule,
+                MatButtonModule,
+                MatTooltipModule,
+                MatCardModule,
+                MatListModule,
+                MatMenuModule,
+                MatCheckboxModule,
+                MatSelectModule,
+                MatAutocompleteModule,
+                MatDatepickerModule,
+                MatToolbarModule,
+                MatAutocompleteModule
+        ]
     exports: [
         MatDialogModule,
         MatFormFieldModule,

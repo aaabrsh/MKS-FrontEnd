@@ -1,0 +1,42 @@
+<h3 mat-dialog-title> Transport Plan Item</h3>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field class="full-width">
+      <input
+        type="text"
+        matInput
+        formControlName="route_id"
+        placeholder="Route"
+      />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input
+        type="text"
+        matInput
+        formControlName="quantity"
+        placeholder="Quantity"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Unit </mat-label>
+      <mat-select formControlName="unit_id" > 
+        <mat-option *ngFor="let item of locations$| async" [value]="item.id">
+          {{ item.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input
+        type="text"
+        matInput
+        formControlName="quantity"
+        placeholder="Quantity"
+      />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button type="submit" (click)="onSubmit()">Save</button>
+</div>

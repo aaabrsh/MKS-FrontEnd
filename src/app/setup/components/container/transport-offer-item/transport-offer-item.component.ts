@@ -6,7 +6,8 @@ import { OfferItemsQuery } from 'src/app/setup/state/offer-items.query';
 import { OfferItemsService } from 'src/app/setup/state/offer-items.service';
 import { Column } from 'src/app/shared/models/column.model';
 import { TransportOfferItemFormComponent } from '../../ui/transport-offer-item-form/transport-offer-item-form.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { TransportBidItemService } from 'src/app/setup/state/state/transport-bid-item.service';
 import { TransportBidItemQuery } from 'src/app/setup/state/state/transport-bid-item.query';
 import { TransportBidItem } from 'src/app/setup/models/transport_bid_item.model';
@@ -31,17 +32,19 @@ export class TransportOfferItemComponent implements OnInit {
   columns: Column[] = [
     { name: 'transport_offer_id', label: 'Transport Offer' },
     { name: 'transport_bid_item_id', label: 'Transport Bid Item ID' },
-    { name: 'price', label: 'Offer Date' },
+    { name: 'price', label: 'Price' },
   ];
 
-  offerItems: OfferItem[] = [];
+  offerItems$: Observable<any[]> = this.query.selectAll({
+        filterBy: [(entity: any) => entity.transport_offer_id == this.router.url.slice(this.router.url.lastIndexOf('/')+1)]
+      });
+  bidItems$: Observable<any[]>;
 
-  offerItems$: Observable<any[]> = this.query.selectAll();
-  bidItems$: Observable<any[]> = this.bidItemsQuery.selectAll();
-  transportOffer$: Observable<any[]> = this.transportOfferQuery.selectAll();
-  transportOffer: TransportOffer;
-  transportBidId: number;
-  bidItems: TransportBidItem[];
+  transportOffer$: Observable<any[]> = this.transportOfferQuery.selectAll({
+    filterBy: [(entity: any) => entity.id == this.router.url.slice(this.router.url.lastIndexOf('/')+1)]
+  });
+
+  transportBidRef: string;
 
   id: number;
 
@@ -52,57 +55,23 @@ export class TransportOfferItemComponent implements OnInit {
     private bidItemsQuery: TransportBidItemQuery,
     private transportOfferService: TransportOffersService,
     private transportOfferQuery: TransportOffersQuery,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
+
 
     this.route.params.subscribe((data: any) => {
       this.id = data.id;
     });
-    this.offerItems$.pipe(
-      tap((data) => {
-        const length = data.length;
-        for (let i = 0; i < length; i++) {
-          var offer: any = {};
 
-          offer.id = data[0].id;
-          offer.price = data[0].price;
-          offer.winner = data[0].winner;
-          offer.rank = data[0].rank;
-          offer.transport_offer_id = data[0].transport_offer_id;
-          offer.transport_bid_item_id = data[0].transport_bid_item.id;
+    this.transportOffer$.subscribe((data: any)=>{
+      this.transportBidRef = data[0].transport_bid_reference_no;
 
-          data.splice(0, 1);
-          if (offer.transport_offer_id == this.id) {
-            data.push(offer);
-          }
-        }
-      })).subscribe((data) => {
-        this.offerItems = data;
+      this.bidItems$ = this.bidItemsQuery.selectAll({
+        filterBy: [(entity: any) => entity.transport_bid_reference_no == this.transportBidRef]
       });
 
-    this.transportOffer$.pipe(
-      tap((data) => {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].id == this.id) {
-            this.transportOffer = data[i];
-            this.transportBidId = data[i].transport_bid.id;
-            break;
-          }
-        }
-      })
-    ).subscribe(() => {
-      this.bidItems$.pipe(
-        tap((data) => {
-          const length = data.length;
-          for (let i = 0; i < data.length; i++) {
-            if (this.transportBidId != data[i].transport_bid.id) {
-              data.splice(i, 1);
-              i = i - 1;
-            }
-          }
-          this.bidItems = data;
-
-        })).subscribe();
     });
+
   }
 
   ngOnInit(): void {
@@ -117,7 +86,8 @@ export class TransportOfferItemComponent implements OnInit {
       disableClose: true,
       data: {
         values: event.item,
-        bidItems: this.bidItems
+        bidItems$: this.bidItems$
+
       }
     });
 
@@ -136,7 +106,7 @@ export class TransportOfferItemComponent implements OnInit {
       disableClose: true,
       data: {
         values: EMPTY_OFFER_ITEM,
-        bidItems: this.bidItems
+        bidItems$: this.bidItems$
       }
     });
 

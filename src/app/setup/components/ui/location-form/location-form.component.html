@@ -1,0 +1,43 @@
+<h3 mat-dialog-title>New Location</h3>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field class="full-width">
+      <input type="text" matInput formControlName="code" placeholder="Code" required/>
+      <mat-error *ngIf="this.data.formData.code.errors?.['required']">Code is Required</mat-error> 
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input type="text" matInput formControlName="name" placeholder="Name" />
+    <mat-error *ngIf="this.data.formData.name.errors?.['required']">Name is Required</mat-error> 
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Location Type</mat-label>
+         <mat-select formControlName="location_type" required>
+            <mat-option *ngFor="let item of locationDropDown;" [value]= item>
+            {{ item }}
+            </mat-option> 
+        </mat-select>
+        <mat-error *ngIf="this.data.formData.location_type.errors?.['required']">Location Type is Required</mat-error> 
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Ancestry</mat-label>
+         <mat-select formControlName="ancestry" [(value)]="selected">
+            <mat-option *ngFor="let item of locations$|async;" [value]="item.id">
+            {{ item.name }}
+            </mat-option> 
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <textarea
+        type="text"
+        matInput
+        formControlName="description"
+        placeholder="Description"
+      ></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button (click)="onCancel()" >Cancel</button>
+  <button mat-raised-button type="submit" (click)="onSubmit()">Save</button>
+</div>

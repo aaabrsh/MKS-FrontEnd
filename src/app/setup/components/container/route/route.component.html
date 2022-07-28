@@ -1,0 +1,10 @@
+<cats-toolbar [actions]="actions"
+              (actionClick)="onAdd($event)"
+></cats-toolbar>
+
+<cats-list [columns]="columns"
+           [data]="routes$|async"
+           [hasAction]="true"
+           [actions]="tableActions"
+           (actionClick)="onEdit($event)"
+></cats-list>

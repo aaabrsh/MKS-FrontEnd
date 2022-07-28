@@ -10,32 +10,30 @@ import { TransportOffersStore } from './transport-offers.store';
 @Injectable({ providedIn: 'root' })
 export class TransportOffersService {
 
-  // transport_offers: TransportOffer[] = [
-  //   {id: 1, transport_bid_id: 1, transporter_id: 1, offer_date: '2022-07-14', bid_bond_amount: 1000},
-  //   {id: 2, transport_bid_id: 1, transporter_id: 2, offer_date: '2022-07-19', bid_bond_amount: 1000},
-  //   {id: 3, transport_bid_id: 2, transporter_id: 3, offer_date: '2022-06-30', bid_bond_amount: 1000},
-  // ];
-
   constructor(private transportOffersStore: TransportOffersStore,
     private http: HttpClient,
     private utilService: UtilService) {
-    }
+  }
+
 
 
   get() {
     const url = `${environment.apiUrl}/transport_offers`;
     return this.http.get(url).pipe(
-      tap({next: (response: any) => {
-        if (response.success) {
-          this.transportOffersStore.set(response.data);
-        } else {
-          this.utilService.showErrorMessage(response.error);
-        }
-      }, error: () => this.utilService.showErrorMessage('Error')})
+      tap({
+        next: (response: any) => {
+          if (response.success) {
+            this.transportOffersStore.set(response.data);
+          } else {
+            this.utilService.showErrorMessage(response.error);
+          }
+        }, error: () => this.utilService.showErrorMessage('Error')
+      })
     )
   }
 
-  add(transportOffer: TransportOffer) {    
+  add(transportOffer: TransportOffer) {
+
     const url = `${environment.apiUrl}/transport_offers`;
     return this.http.post(url, transportOffer).pipe(
       tap({
@@ -50,7 +48,8 @@ export class TransportOffersService {
     )
   }
 
-  update(id: any, transportOffer: Partial<TransportOffer>) {    
+  update(id: any, transportOffer: Partial<TransportOffer>) {
+
     const url = `${environment.apiUrl}/transport_offers/${id}`;
     return this.http.put(url, transportOffer).pipe(
       tap({

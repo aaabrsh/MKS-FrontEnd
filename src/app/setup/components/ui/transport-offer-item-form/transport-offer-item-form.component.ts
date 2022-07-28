@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DummyDataService } from 'src/app/setup/state/dummies/dummy-data.service';
 
 @Component({
   selector: 'app-transport-offer-item-form',
@@ -18,10 +17,11 @@ export class TransportOfferItemFormComponent implements OnInit {
   bid_items: any[];
 
   constructor(private fb: FormBuilder,
-    private dummy: DummyDataService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    
-    this.bid_items = data.bidItems;
+
+    data.bidItems$.subscribe((data: any) => {
+      this.bid_items = data;
+    });
 
     this.form = this.fb.group({
       id: data.values.id,

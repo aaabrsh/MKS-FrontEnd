@@ -18,7 +18,25 @@ export class AppComponent {
   }
 
   onTransporter(): void {
-    this.router.navigate(['/transporters'], {relativeTo: this.route})
+    this.router.navigate(['/transporters'], { relativeTo: this.route })
+  }
+
+  onTransportOffer(): void {
+    this.router.navigate(['/transport_offers'], { relativeTo: this.route })
+  }
+
+  onTransportBid() {
+    this.router.navigate(['/transport_bid'], { relativeTo: this.route })
+  }
+
+  onTransportPlan(): void {
+    this.router.navigate(['/transport_plans'], { relativeTo: this.route })
+  }
+  onLocation(): void {
+    this.router.navigate(['/locations'], { relativeTo: this.route })
+  }
+  onRoute(): void {
+    this.router.navigate(['/routes'], { relativeTo: this.route })
   }
 
   onTransportOffer(): void{
