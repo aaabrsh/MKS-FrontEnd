@@ -2,6 +2,7 @@ import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+
 @Component({
   selector: 'app-transporter-form',
   templateUrl: './transporter-form.component.html',
@@ -21,13 +22,15 @@ export class TransporterFormComponent implements OnInit {
       name: [data.name, [Validators.required]],
       address: [data.address, [Validators.required]],
       contact_phone: [data.contact_phone, [Validators.required]]
-
     });
   }
 
   ngOnInit(): void {
   }
 
+  onCancel(){
+    this.dialog.closeAll();
+  }
   onSubmit(): void {
     const payload = this.form.value;
     this.formSubmit.emit(payload);
@@ -42,4 +45,6 @@ export class TransporterFormComponent implements OnInit {
   onCancel(): void {
     this.dialogRef.close();
   }
+
 }
+

@@ -7,6 +7,7 @@ import { OfferItemsService } from 'src/app/setup/state/offer-items.service';
 import { Column } from 'src/app/shared/models/column.model';
 import { TransportOfferItemFormComponent } from '../../ui/transport-offer-item-form/transport-offer-item-form.component';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { TransportBidItemService } from 'src/app/setup/state/state/transport-bid-item.service';
 import { TransportBidItemQuery } from 'src/app/setup/state/state/transport-bid-item.query';
 import { TransportBidItem } from 'src/app/setup/models/transport_bid_item.model';
@@ -57,6 +58,7 @@ export class TransportOfferItemComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router) {
 
+
     this.route.params.subscribe((data: any) => {
       this.id = data.id;
     });
@@ -85,6 +87,7 @@ export class TransportOfferItemComponent implements OnInit {
       data: {
         values: event.item,
         bidItems$: this.bidItems$
+
       }
     });
 

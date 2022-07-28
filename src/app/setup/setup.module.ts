@@ -25,6 +25,7 @@ import { LocationFormComponent } from './components/ui/location-form/location-fo
 import { RouteFormComponent } from './components/ui/route-form/route-form.component';
 import { TransportPlanItemFormComponent } from './components/ui/transport-plan-item-form/transport-plan-item-form.component';
 
+
 @NgModule({
   declarations: [
     TransporterComponent,
@@ -47,6 +48,7 @@ import { TransportPlanItemFormComponent } from './components/ui/transport-plan-i
     LocationFormComponent,
     RouteFormComponent,
     TransportPlanItemFormComponent,
+
   ],
   imports: [
     CommonModule,

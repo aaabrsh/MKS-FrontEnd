@@ -91,6 +91,7 @@ export class TransportOfferComponent implements OnInit {
   }
 
   onEdit(event: any): void {
+  
     const dialogRef = this.dialog.open(TransportOfferFormComponent, {
       disableClose: true,
       data: { 

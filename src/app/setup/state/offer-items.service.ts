@@ -41,7 +41,6 @@ export class OfferItemsService {
     return this.http.get(url).pipe(
       tap({next: (response: any) => {
         if (response.success) {
-
           for (let i = 0; i < response.data.length; i++) {
 
             response.data[i].transport_bid_item_id = response.data[i].transport_bid_item.id;
@@ -57,6 +56,7 @@ export class OfferItemsService {
   }
 
   add(OfferItem: OfferItem) {
+
     const url = `${environment.apiUrl}/transport_offer_items`;
     return this.http.post(url, OfferItem).pipe(
       tap({
@@ -79,7 +79,7 @@ export class OfferItemsService {
       tap({
         next: (response: any) => {
           if (response.success) {
-
+          
             response.data.transport_bid_item_id = response.data.transport_bid_item.id;
             response.data.transport_bid_reference_no = response.data.transport_bid_item.transport_bid_reference_no;
 

@@ -23,6 +23,7 @@ export class TransportOfferFormComponent implements OnInit {
   bidId: number = null;
   transporterCode: number = null;
 
+
   constructor(private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
@@ -41,6 +42,7 @@ export class TransportOfferFormComponent implements OnInit {
           this.bidId = element.id;
         }
       });
+
     });
 
     this.form = this.fb.group({

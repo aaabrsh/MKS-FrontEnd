@@ -16,6 +16,7 @@ export class TransportOffersService {
   }
 
 
+
   get() {
     const url = `${environment.apiUrl}/transport_offers`;
     return this.http.get(url).pipe(
@@ -32,6 +33,7 @@ export class TransportOffersService {
   }
 
   add(transportOffer: TransportOffer) {
+
     const url = `${environment.apiUrl}/transport_offers`;
     return this.http.post(url, transportOffer).pipe(
       tap({
@@ -47,6 +49,7 @@ export class TransportOffersService {
   }
 
   update(id: any, transportOffer: Partial<TransportOffer>) {
+
     const url = `${environment.apiUrl}/transport_offers/${id}`;
     return this.http.put(url, transportOffer).pipe(
       tap({

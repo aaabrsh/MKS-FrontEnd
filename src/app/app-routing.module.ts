@@ -11,6 +11,7 @@ import { TransportPlanItemComponent } from './setup/components/container/transpo
 import { TransportPlanComponent } from './setup/components/container/transport-plan/transport-plan.component';
 import { UnitOfMeasureComponent } from './setup/components/container/unit-of-measure/unit-of-measure.component';
 
+
 const routes: Routes = [
   {path: 'transporters', component: TransporterComponent},
   {path: 'transport_offers', component: TransportOfferComponent},
@@ -23,8 +24,6 @@ const routes: Routes = [
   {path:'locations', component: LocationComponent},
   {path:'routes', component:RouteComponent},
   {path:'transport_plan_items/:id', component: TransportPlanItemComponent}
-
-];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

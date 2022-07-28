@@ -7,6 +7,7 @@ export const environment = {
   // apiUrl: 'http://192.168.246.244:3000'
   apiUrl:'http://localhost:3000'
   // apiUrl:'http://10.1.1.144:3000'
+
 };
 
 /*
