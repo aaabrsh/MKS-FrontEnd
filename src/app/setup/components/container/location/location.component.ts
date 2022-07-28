@@ -24,10 +24,10 @@ export class LocationComponent implements OnInit {
   // ]
 
   columns: Column[] = [
-    { name: 'code', label: 'Code'},
-    { name: 'name', label: 'Name'},
-    { name: 'location_type', label: 'Location Type'},
-    { name: 'description', label: 'Description'}
+    { name: 'code', label: 'Code' },
+    { name: 'name', label: 'Name' },
+    { name: 'location_type', label: 'Location Type' },
+    { name: 'description', label: 'Description' }
   ];
 
 
@@ -45,21 +45,23 @@ export class LocationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.get();    
+    this.service.get();
   }
 
-  onLoad($event: any): void{
-    this.locations = this.service.getRegions();
+  onLoad($event: any): void {
+    this.service.getRegions().subscribe((data) => {
+      this.locations = data;
+    });
   }
 
-  onExpand($event: any): void{
-      this.loading = false;
-      const node = $event.node;
-      this.service.getChildren($event.node.data.id).subscribe((data) => {
-        node.children = data;
-      });
-      
-      // node.children.push(temp);
+  onExpand($event: any): void {
+    this.loading = false;
+    const node = $event.node;
+    this.service.getChildren($event.node.data.id).subscribe((data) => {
+      node.children = data;
+    });
+    // console.log(node)
+
     //   node.children = [
     //     {
     //         data: {  
@@ -76,10 +78,9 @@ export class LocationComponent implements OnInit {
     //         }
     //     }
     // ];
-    node.expanded = true;
-      
-      this.locations = [...this.locations];
-      this.locations = [...this.locations];
+
+    this.locations = [...this.locations];
+    this.locations = [...this.locations];
 
   }
 

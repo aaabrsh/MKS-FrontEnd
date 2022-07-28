@@ -48,7 +48,7 @@ export class LocationsService {
       })
     ).subscribe();
 
-    return regions;
+    return of(regions);
   }
 
   getChildren(id: number){
